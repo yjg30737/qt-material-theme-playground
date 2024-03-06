@@ -7,6 +7,11 @@ Qt material theme playground (changing theme during runtime)
 
 This will work in PyQt6, PySide6 as well.
 
+## How to Run
+1. git clone ~
+2. pip install -r requirements.txt
+3. python main.py
+
 ## Preview
 ### Changing theme during runtime
 
