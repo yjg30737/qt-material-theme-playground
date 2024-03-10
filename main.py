@@ -35,10 +35,9 @@ class MainWindow(QMainWindow):
         materialCmbBox = QComboBox()
         materialCmbBox.addItems(
             DATA.keys()
-
         )
         materialCmbBox.currentTextChanged.connect(self.apply_theme_in_runtime)
-        materialCmbBox.setCurrentText('light_blue.xml')
+        materialCmbBox.setCurrentText(materialCmbBox.itemText(0))
 
         self.__middleWidget = QTextEdit()
 
@@ -67,6 +66,8 @@ class MainWindow(QMainWindow):
         mainWidget = QWidget()
         mainWidget.setLayout(lay)
         self.setCentralWidget(mainWidget)
+
+        self.apply_theme_in_runtime(materialCmbBox.currentText())
 
     def __run(self):
         dialog = SettingsDialog()
