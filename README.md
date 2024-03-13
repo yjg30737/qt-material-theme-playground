@@ -30,7 +30,7 @@ The theme is applied in the dialog as well.
 font_size won't work for some reasons. So you have to set font by yourself like this:
 
 ```python
-QApplication.setFont('Arial', 12)
+QApplication.setFont(QFont('Arial', 12))
 ```
 
 If you want to switch font during runtime, you can refer to <a href="https://github.com/yjg30737/pyqt-font-dialog.git">pyqt-font-dialog</a>.
