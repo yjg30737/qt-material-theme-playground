@@ -1,8 +1,6 @@
 import os
 import sys
 
-from PyQt5.QtGui import QFont
-
 # Get the absolute path of the current script file
 script_path = os.path.abspath(__file__)
 
@@ -15,6 +13,7 @@ sys.path.insert(0, os.getcwd())  # Add the current directory as well
 from PyQt5.QtWidgets import QMainWindow, QPushButton, QApplication, QComboBox, QVBoxLayout, QWidget, QTextEdit, QLabel, \
     QSlider, QSpinBox
 from PyQt5.QtCore import Qt, QCoreApplication
+from PyQt5.QtGui import QFont, QIcon
 
 from qt_material import apply_stylesheet
 from settingsDialog import SettingsDialog
@@ -22,6 +21,25 @@ from script import DATA
 
 QApplication.setAttribute(Qt.AA_EnableHighDpiScaling)
 QCoreApplication.setAttribute(Qt.AA_UseHighDpiPixmaps)  # HighDPI support
+
+class CustomButton(QPushButton):
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.setFlat(True)
+
+    def setIcon(self, icon):
+        super().setIcon(icon)
+        self.setIconSize(icon.actualSize(QSize(24, 24)))
+
+    def setIconSize(self, size):
+        super().setIconSize(size)
+        self.setFixedSize(size.width() + 10, size.height() + 10)
+
+    def setFlat(self, b):
+        pass
+
+    def setStyleSheet(self, style):
+        pass
 
 
 class MainWindow(QMainWindow):
@@ -42,7 +60,11 @@ class MainWindow(QMainWindow):
         self.__middleWidget = QTextEdit()
 
         btn = QPushButton('Run')
+        btn.setIcon(QIcon('ico/setting.svg'))
         btn.clicked.connect(self.__run)
+
+        inputLineEdit = QTextEdit('Hello')
+        bushBtn = CustomButton('Martha')
 
         self.__densityScaleSlider = QSlider()
         self.__densityScaleSlider.setOrientation(Qt.Horizontal)
@@ -61,6 +83,8 @@ class MainWindow(QMainWindow):
         lay.addWidget(self.__densityScaleSlider)
         lay.addWidget(self.__fontSizeSpinBox)
         lay.addWidget(self.__middleWidget)
+        lay.addWidget(inputLineEdit)
+        lay.addWidget(bushBtn)
         lay.addWidget(btn)
 
         mainWidget = QWidget()
@@ -80,7 +104,6 @@ class MainWindow(QMainWindow):
             'warning': '#ffc107',
             'success': '#17a2b8',
 
-            # Font doesn't work
             'line_height': '12px',
 
             # Density Scale
@@ -90,7 +113,7 @@ class MainWindow(QMainWindow):
 
         v = DATA[value]
 
-        apply_stylesheet(app, theme=v, extra=extra)
+        apply_stylesheet(app, theme=v, extra=extra, invert_secondary=True, css_file='custom.css')
 
 
 if __name__ == "__main__":

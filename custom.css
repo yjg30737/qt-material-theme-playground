@@ -1,0 +1,13 @@
+QComboBox, QSpinBox {{
+  color: {QTMATERIAL_PRIMARYCOLOR};
+}}
+
+QComboBox QAbstractItemView {{
+  color: {QTMATERIAL_PRIMARYCOLOR};
+}}
+
+CustomButton {{
+  color: {QTMATERIAL_PRIMARYTEXTCOLOR};
+  background-color: {QTMATERIAL_PRIMARYCOLOR};
+  border: 5px solid {QTMATERIAL_SECONDARYCOLOR};
+}}
